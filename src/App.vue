@@ -1,14 +1,14 @@
 <template>
-  <HelloWorld/>
+  <Calculadora/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Calculadora from './components/home-page.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Calculadora
   }
 }
 </script>
