@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Calculadora from './components/home-page.vue'
+import Calculadora from './components/Calculadora/home-page.vue'
 
 export default {
   name: 'App',
