@@ -1,25 +1,89 @@
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+export default {
   data() {
     return {
-      expression: '',
-      buttons: ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '/', '.']
+      current: '',
+      display: '0',
+      logList: '',
+      lastOperator: '',
+      lastValue: ''
     }
   },
   methods: {
-    addToExpression(char) {
-      this.expression += char
-    },
-    calculate() {
-      try {
-        this.expression = eval(this.expression)
-      } catch (error) {
-        this.expression = 'Error'
+    append(value) {
+      if (this.display === '0' && value !== '.') {
+        this.display = ''
       }
+      this.current += value
+      this.display += value
     },
     clear() {
-      this.expression = ''
+      this.current = ''
+      this.display = '0'
+      this.logList = ''
+      this.lastOperator = ''
+      this.lastValue = ''
+    },
+    operate(operator) {
+      if (this.current !== '') {
+        if (this.lastOperator !== '') {
+          this.calculate();
+        } else {
+          this.lastValue = parseFloat(this.current);
+          this.logList += this.current + ' ' + operator + ' ';
+          this.current = '';
+          this.display = this.logList;
+          this.lastOperator = operator;
+        }
+      } else if (this.lastValue !== '' && this.lastOperator !== '') {
+        this.lastOperator = operator;
+        this.logList = this.logList.slice(0, -1) + operator + ' ';
+        this.display = this.logList
+      }
+    },
+    calculate() {
+      const currentValue = parseFloat(this.current)
+      let result
+      switch (this.lastOperator) {
+        case '+':
+          result = this.lastValue + currentValue
+          break
+        case '-':
+          result = this.lastValue - currentValue
+          break
+        case '*':
+          result = this.lastValue * currentValue
+          break
+        case '/':
+          result = this.lastValue / currentValue
+          break
+      }
+      this.display = result.toString()
+      this.current = ''
+      this.lastValue = result
+      this.logList = ''
+      this.lastOperator = ''
+    },
+    equal() {
+      if (this.lastOperator !== '' && this.current !== '') {
+        this.calculate()
+      }
+    },
+    dot() {
+      if (!this.current.includes('.')) {
+        this.append('.')
+      }
+    },
+    sign() {
+      if (this.current !== '' && this.current !== '0') {
+        this.current = (-parseFloat(this.current)).toString()
+        this.display = this.current
+      }
+    },
+    percent() {
+      if (this.current !== '') {
+        this.current = (parseFloat(this.current) / 100).toString()
+        this.display = this.current
+      }
     }
   }
-})
+}
