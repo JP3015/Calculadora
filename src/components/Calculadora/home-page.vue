@@ -33,15 +33,28 @@
 <style>
   @import url("https://fonts.googleapis.com/css?family=Poppins:300,500&display=swap");
   
+  @font-face {
+    font-family: 'Digital7';
+    src: url('@/assets/fonts/digital-7.ttf') format('truetype');
+  }
+
   body{
     margin: 0;
-    background-color: rgb(156, 153, 153);
+    background-color: #e3f9ff;
   }
   .app{
     margin-top: -60px;
     width: 100%;
     height: 100vh;
   }
+
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+  }
+
   .calculator {
     display: grid;
     grid-template-rows: repeat(7, minmax(60px, auto));
@@ -51,11 +64,12 @@
     font-family: "Poppins";
     font-weight: 300;
     font-size: 18px;
-    background-color: rgb(57, 54, 83);
+    background-color: #0e0f0f;
     border-radius: 10px;
     box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);
     margin: 0 auto;
     width: 285px;
+    height: 450px;
   }
 
   .btn,.zero {
@@ -72,10 +86,12 @@
   }
 
   .display {
-    text-align: right;
+    font-family: 'Digital7';
+    font-size: 40px;
     grid-column: 1 / 5;
     display: flex;
     align-items: center;
+    justify-content: right;
     background-color: green;
   }
 
@@ -84,7 +100,12 @@
   }
 
   .operator {
-    background-color: black;
+    background-color: orange;
     color: white;
   }
+
+  .btn:active{
+    transform: scale(0.85);
+  }
+  
 </style>
