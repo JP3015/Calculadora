@@ -58,7 +58,7 @@ export default {
           break
       }
       this.display = result.toString()
-      this.current = ''
+      this.current = result
       this.lastValue = result
       this.logList = ''
       this.lastOperator = ''
